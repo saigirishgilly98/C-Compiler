@@ -205,12 +205,12 @@ void symbolInsert(struct symbol table[], int index, char* tokenName, char* token
 }
 
 // Checking whether token already exists in symbol table
-int check_symbol_table_present(char* symbol_table_string, char* yytext_string)
+int check_symbol_table_present(struct symbol table[], char* yytext_string)
 {
 	int rep = 0,k;
 	for(k=0;k<i;k++) 
     {
-      if(!(strcmp(symbol_table_string,yytext_string)))
+      if(!(strcmp(table[k].token,yytext_string)))
       {
         rep = 1;
         break;
@@ -220,12 +220,12 @@ int check_symbol_table_present(char* symbol_table_string, char* yytext_string)
 }
 
 // Checking whether token already exists in constant table
-int check_constant_table_present(char* constant_table_string, char* yytext_string)
+int check_constant_table_present(struct symbol table[], char* yytext_string)
 {
 	int rep = 0,k;
 	for(k=0;k<c;k++) 
     {
-      if(!(strcmp(constant_table_string,yytext_string)))
+      if(!(strcmp(table[k].token,yytext_string)))
       {
         rep = 1;
         break;
@@ -264,10 +264,12 @@ int main(void)
       continue;
     }
 
-    rep = check_symbol_table_present(symbolTable[k].token,yytext);
-  
-    rep = check_constant_table_present(constantTable[k].token,yytext);
-   
+    if(rep == 0)
+    	rep = check_symbol_table_present(symbolTable,yytext);
+  	
+    if(rep == 0)
+    	rep = check_constant_table_present(constantTable,yytext);
+    
     if(ba_c > ba_o)
       printf("\n-------------ERROR : UNMATCHED ')' at Line %d------------------\n", yylineno);
 
@@ -412,7 +414,8 @@ int main(void)
         id[t] = yytext[t];
       }
 
-      rep = check_symbol_table_present(symbolTable[k].token,id);
+      if(rep == 0)
+      	rep = check_symbol_table_present(symbolTable,id);
 
       if(rep == 0)
       {
@@ -473,7 +476,8 @@ int main(void)
         id[t] = yytext[t];
       }
 
-      rep = check_symbol_table_present(symbolTable[k].token,id);
+      if (rep == 0)
+      	rep = check_symbol_table_present(symbolTable,id);
 
       if(rep == 0)
       {
