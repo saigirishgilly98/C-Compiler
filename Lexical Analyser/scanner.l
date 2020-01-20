@@ -207,7 +207,7 @@ void symbolInsert(struct symbol table[], int index, char* tokenName, char* token
 // Checking whether token already exists in symbol table
 int check_symbol_table_present(char* symbol_table_string, char* yytext_string)
 {
-	int rep = 0;
+	int rep = 0,k;
 	for(k=0;k<i;k++) 
     {
       if(!(strcmp(symbol_table_string,yytext_string)))
@@ -222,7 +222,7 @@ int check_symbol_table_present(char* symbol_table_string, char* yytext_string)
 // Checking whether token already exists in constant table
 int check_constant_table_present(char* constant_table_string, char* yytext_string)
 {
-	int rep = 0;
+	int rep = 0,k;
 	for(k=0;k<c;k++) 
     {
       if(!(strcmp(constant_table_string,yytext_string)))
