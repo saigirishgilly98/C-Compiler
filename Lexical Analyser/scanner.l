@@ -19,101 +19,64 @@
   #define FOR 17
   #define STRUCT 18
 
-//Identifier and Constant
-  #define ID 20
-  #define CONST 21
+  #define ID 20 	//Identifier
+  #define CONST 21	//Constant
 
-//Operators
-//Comparators
-  #define LE 22
-  	// Less than equal to
-  #define GE 23
-  	// Greater than equal to
-  #define EQ 24
-  	// Check for equality
-  #define NE 25
-  	// Not equal to check
-  #define L 77
-  	// Less than
-  #define G 78
-  	// Greater than
+//Relational Operators
+  #define LE 22		// Less than equal to
+  #define GE 23		// Greater than equal to
+  #define EQ 24 	// Check for equality
+  #define NE 25		// Not equal to check
+  #define L 77		// Less than
+  #define G 78		// Greater than
 
-//Logical
-  #define OR 26
+//Logical Operators
+  #define OR 26		
   #define AND 27
   #define NOT 28
 
-//Assignment
-  #define ASS 29
-  	//   =	Simple assignment operator.
-  #define ADDASS 30
-  	// +=	Add AND assignment operator.
-  #define SUBASS 31
-  	// -=	Subtract AND assignment operator.
-  #define MULASS 32
-  	// *=	Multiply AND assignment operator.
-  #define DIVASS 33
- 	// /=	Divide AND assignment operator.
-  #define MODASS 34
-  	//	%=	Modulus AND assignment operator.
+//Assignment Operators
+  #define ASS 29	//  =	Simple assignment operator.
+  #define ADDASS 30	// +=	Add AND assignment operator.
+  #define SUBASS 31	// -=	Subtract AND assignment operator.
+  #define MULASS 32	// *=	Multiply AND assignment operator.
+  #define DIVASS 33	// /=	Divide AND assignment operator.
+  #define MODASS 34	// %=	Modulus AND assignment operator.
 
-//Arithmetic
+//Arithmetic Operators
   #define PLUS 35
   #define SUB 36
   #define MULT 37
   #define DIV 38
   #define MOD 39
-  #define PP 40
-  	// ++
-  #define MM 41
-  	// --
+  #define PP 40		// ++
+  #define MM 41		// --
 
-//Bitwise Ops
-  #define BA 42
-  	// Bitwise and
-  #define BO 43
-  	// Bitwise or
-  #define BC 44
-  	// Bitwise complement
-  #define OC 45
-	//one's complement
-  #define LS 46
-    // left shift
-  #define RS 47
-    //right shift
+//Bitwise Operators
+  #define BA 42		// Bitwise and
+  #define BO 43		// Bitwise or
+  #define BC 44		// Bitwise complement
+  #define OC 45		//one's complement
+  #define LS 46		// left shift
+  #define RS 47		//right shift
 
-// Miscelaneous tokens
+// Other tokens such as special characters and paranthesis
   #define SEMICOLON 53
-  #define BA1 54
-  	// '(' bracket
-  #define BA2 55
-  	// ')' bracket
-  #define BB1 56
-  	// '[' bracket
-  #define BB2 57
-  	// ']' bracket
-  #define BC1 58
-  	// '{' bracket
-  #define BC2 59
-  	//'}' bracket
-  #define COMMA 60
-  	// ','
-  #define Q 61
-  	// Quote "
-  #define SQ 62
-  	// Single Quote '
-  #define HEAD 63
-  	// Header file
-  #define ARR 64
-	// Array
-  #define SLC 65
-	// Single comment '/'
-  #define MLCO 66
-  	// Multiline Comment Open '/*'
-  #define MLCC 67
-  	// Multilien Comment Close '*/'
-  #define DEF 68
-    // Macro
+  #define BA1 54	// '(' bracket
+  #define BA2 55	// ')' bracket
+  #define BB1 56	// '[' bracket
+  #define BB2 57	// ']' bracket
+  #define BC1 58	// '{' bracket
+  #define BC2 59	//'}' bracket
+  #define COMMA 60	// ','
+  #define Q 61		// Quote "
+  #define SQ 62		// Single Quote '
+  #define HEAD 63	// Header file
+  #define ARR 64	// Array
+  #define SLC 65	// Single comment '/'
+  #define MLCO 66	// Multiline Comment Open '/*'
+  #define MLCC 67	// Multilien Comment Close '*/'
+  #define DEF 68	// Macro
   #define PRINTF 69
   #define SCANF 70
   #define FUNC 71
@@ -241,6 +204,36 @@ void symbolInsert(struct symbol table[], int index, char* tokenName, char* token
   strcpy(table[index].type, tokenType);
 }
 
+// Checking whether token already exists in symbol table
+int check_symbol_table_present(char* symbol_table_string, char* yytext_string)
+{
+	int rep = 0;
+	for(k=0;k<i;k++) 
+    {
+      if(!(strcmp(symbol_table_string,yytext_string)))
+      {
+        rep = 1;
+        break;
+      }
+    }
+    return rep;
+}
+
+// Checking whether token already exists in constant table
+int check_constant_table_present(char* constant_table_string, char* yytext_string)
+{
+	int rep = 0;
+	for(k=0;k<c;k++) 
+    {
+      if(!(strcmp(constant_table_string,yytext_string)))
+      {
+        rep = 1;
+        break;
+      }
+    }
+    return rep;
+}
+
 int main(void)
 {
   int newToken, // The current token being processed
@@ -250,7 +243,7 @@ int main(void)
       bc_o=0,bc_c=0,bc_l, // Number of open and close curly braces,  last line where the open curly brace was used
       rep=0; // Flag to denote whether the current token is already in symbol table
 
-  //Taking the input program
+  //Taking the input test case  
   yyin= fopen("test.c","r");
 
   //Reading a single token from the program
@@ -271,24 +264,10 @@ int main(void)
       continue;
     }
 
-    for(k=0;k<i;k++) // Checking whether token already exists in symbol table
-    {
-      if(!(strcmp(symbolTable[k].token,yytext)))
-      {
-        rep = 1;
-        break;
-      }
-    }
-
-    for(k=0;k<c;k++) // Checking whether token already exists in constant table
-    {
-      if(!(strcmp(constantTable[k].token,yytext)))
-      {
-        rep = 1;
-        break;
-      }
-    }
-
+    rep = check_symbol_table_present(symbolTable[k].token,yytext);
+  
+    rep = check_constant_table_present(constantTable[k].token,yytext);
+   
     if(ba_c > ba_o)
       printf("\n-------------ERROR : UNMATCHED ')' at Line %d------------------\n", yylineno);
 
@@ -433,14 +412,7 @@ int main(void)
         id[t] = yytext[t];
       }
 
-      for(k=0;k<i;k++) // Checking whether token already exists in symbol table
-      {
-      	if(!(strcmp(symbolTable[k].token,id)))
-      	{
-        	rep = 1;
-       		break;
-      	}
-      }
+      rep = check_symbol_table_present(symbolTable[k].token,id);
 
       if(rep == 0)
       {
@@ -501,14 +473,7 @@ int main(void)
         id[t] = yytext[t];
       }
 
-      for(k=0;k<i;k++) // Checking whether token already exists in symbol table
-      {
-      	if(!(strcmp(symbolTable[k].token,id)))
-      	{
-        	rep = 1;
-       		break;
-      	}
-      }
+      rep = check_symbol_table_present(symbolTable[k].token,id);
 
       if(rep == 0)
       {
