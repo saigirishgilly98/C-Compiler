@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "sem.y" /* yacc.c:339  */
+#line 1 "parser.y" /* yacc.c:339  */
 
 	#include <stdio.h>
 	#include <stdlib.h>
@@ -432,7 +432,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 300 "sem.y" /* yacc.c:355  */
+#line 300 "parser.y" /* yacc.c:355  */
 
 		int ival;
 		char *str;
@@ -1628,7 +1628,7 @@ yyreduce:
   switch (yyn)
     {
         case 6:
-#line 314 "sem.y" /* yacc.c:1646  */
+#line 314 "parser.y" /* yacc.c:1646  */
     {
 	 
 	if ((yyvsp[-4].ival)!=returntype_func(curr_type))
@@ -1649,7 +1649,7 @@ yyreduce:
     break;
 
   case 7:
-#line 330 "sem.y" /* yacc.c:1646  */
+#line 330 "parser.y" /* yacc.c:1646  */
     {
 	
 
@@ -1671,19 +1671,19 @@ yyreduce:
     break;
 
   case 8:
-#line 348 "sem.y" /* yacc.c:1646  */
+#line 348 "parser.y" /* yacc.c:1646  */
     { nP = 1; fname[nP-1] = (yyvsp[-1].ival); }
 #line 1677 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 349 "sem.y" /* yacc.c:1646  */
+#line 349 "parser.y" /* yacc.c:1646  */
     { nP++; fname[nP-1] = (yyvsp[-1].ival); }
 #line 1683 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 375 "sem.y" /* yacc.c:1646  */
+#line 375 "parser.y" /* yacc.c:1646  */
     {
 					if(!(strspn((yyvsp[-1].str),"0123456789")==strlen((yyvsp[-1].str))))
 						storereturn(curr_type,FLOAT);
@@ -1694,13 +1694,13 @@ yyreduce:
     break;
 
   case 25:
-#line 381 "sem.y" /* yacc.c:1646  */
+#line 381 "parser.y" /* yacc.c:1646  */
     {storereturn(curr_type,VOID); curr_type++;}
 #line 1700 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 387 "sem.y" /* yacc.c:1646  */
+#line 387 "parser.y" /* yacc.c:1646  */
     {
 	if(lookup((yyvsp[-4].str)))
 		printf("\nError: Undeclared function %s : Line %d\n", (yyvsp[-4].str), printline());
@@ -1722,7 +1722,7 @@ yyreduce:
     break;
 
   case 30:
-#line 404 "sem.y" /* yacc.c:1646  */
+#line 404 "parser.y" /* yacc.c:1646  */
     {
 	if(lookup((yyvsp[-3].str)))
 		printf("\nError: Undeclared function %s : Line %d\n", (yyvsp[-3].str), printline());
@@ -1736,31 +1736,31 @@ yyreduce:
     break;
 
   case 31:
-#line 414 "sem.y" /* yacc.c:1646  */
+#line 414 "parser.y" /* yacc.c:1646  */
     { temptype = returntype((yyvsp[0].str), stack[index1-1]); it = 0; fTypes2[it] = temptype; }
 #line 1742 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 415 "sem.y" /* yacc.c:1646  */
+#line 415 "parser.y" /* yacc.c:1646  */
     { temptype = temp; it = 0; fTypes2[it] = temptype; }
 #line 1748 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 416 "sem.y" /* yacc.c:1646  */
+#line 416 "parser.y" /* yacc.c:1646  */
     { it++; temptype = returntype((yyvsp[0].str), stack[index1-1]); fTypes2[it] = temptype;}
 #line 1754 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 417 "sem.y" /* yacc.c:1646  */
+#line 417 "parser.y" /* yacc.c:1646  */
     { temptype = temp; it++; fTypes2[it] = temptype;}
 #line 1760 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 435 "sem.y" /* yacc.c:1646  */
+#line 435 "parser.y" /* yacc.c:1646  */
     {
 	  c=0;
 		int scope_curr=returnscope((yyvsp[-2].str),stack[index1-1]);
@@ -1783,7 +1783,7 @@ yyreduce:
     break;
 
   case 41:
-#line 454 "sem.y" /* yacc.c:1646  */
+#line 454 "parser.y" /* yacc.c:1646  */
     {
 					if(lookup((yyvsp[-2].str)))
 						printf("\nUndeclared Variable %s : Line %d\n",(yyvsp[-2].str),printline());
@@ -1796,7 +1796,7 @@ yyreduce:
     break;
 
   case 44:
-#line 464 "sem.y" /* yacc.c:1646  */
+#line 464 "parser.y" /* yacc.c:1646  */
     {
 		if(lookup((yyvsp[0].str)))
 			printf("\nUndeclared Variable %s : Line %d\n",(yyvsp[0].str),printline());
@@ -1809,7 +1809,7 @@ yyreduce:
     break;
 
   case 47:
-#line 476 "sem.y" /* yacc.c:1646  */
+#line 476 "parser.y" /* yacc.c:1646  */
     {
 			if(lookup((yyvsp[-5].str)))
 				printf("\nUndeclared Variable %s : Line %d\n",(yyvsp[-5].str),printline());
@@ -1827,7 +1827,7 @@ yyreduce:
     break;
 
   case 48:
-#line 491 "sem.y" /* yacc.c:1646  */
+#line 491 "parser.y" /* yacc.c:1646  */
     {
 	if(isArray((yyvsp[0].str)))
 	 printf("\nError: Array identifier has no subscript: Line %d\n", printline());
@@ -1860,7 +1860,7 @@ yyreduce:
     break;
 
   case 49:
-#line 519 "sem.y" /* yacc.c:1646  */
+#line 519 "parser.y" /* yacc.c:1646  */
     {
 		if(c==0)
 		{
@@ -1899,19 +1899,19 @@ yyreduce:
     break;
 
   case 60:
-#line 565 "sem.y" /* yacc.c:1646  */
+#line 565 "parser.y" /* yacc.c:1646  */
     { temp = 258;}
 #line 1905 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 566 "sem.y" /* yacc.c:1646  */
+#line 566 "parser.y" /* yacc.c:1646  */
     { temp = 259;}
 #line 1911 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 571 "sem.y" /* yacc.c:1646  */
+#line 571 "parser.y" /* yacc.c:1646  */
     {
 			if( (!(strspn((yyvsp[-1].str),"0123456789")==strlen((yyvsp[-1].str)))) && (yyvsp[-4].ival)==258)
 				printf("\nError : Type Mismatch : Line %d\n",printline());
@@ -1942,7 +1942,7 @@ yyreduce:
     break;
 
   case 63:
-#line 597 "sem.y" /* yacc.c:1646  */
+#line 597 "parser.y" /* yacc.c:1646  */
     {
 		if(!lookup((yyvsp[-1].str)))
 		{
@@ -1968,7 +1968,7 @@ yyreduce:
     break;
 
   case 64:
-#line 618 "sem.y" /* yacc.c:1646  */
+#line 618 "parser.y" /* yacc.c:1646  */
     {
 				if(!lookup((yyvsp[-1].str)))
 				{
@@ -1986,7 +1986,7 @@ yyreduce:
     break;
 
   case 65:
-#line 632 "sem.y" /* yacc.c:1646  */
+#line 632 "parser.y" /* yacc.c:1646  */
     {
 						insert((yyvsp[-4].str),ARRAY,g_addr,1);
 						insert((yyvsp[-4].str),(yyvsp[-5].ival),g_addr,1);
@@ -2229,7 +2229,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 645 "sem.y" /* yacc.c:1906  */
+#line 645 "parser.y" /* yacc.c:1906  */
 
 
 #include "lex.yy.c"
